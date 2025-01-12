@@ -1,0 +1,75 @@
+<!-- Custom Sentence Mining Template   -->
+<!-- Based on Migaku and Kimchi Reader -->
+<!-- Back Template                    -->
+
+<div class="outer-container">
+    <div class="inner-card">
+        <!-- Focus Word -->
+        <div class="focus-word">{{FocusWord}}</div>
+
+        <!-- Sentence -->
+        <div class="sentence">{{Sentence}}</div>
+
+        <!-- Audio Section -->
+        <div class="audio-section">
+            <div class="audio-button" onclick="pycmd('play:r:0')">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <path
+                        fill="currentColor"
+                        d="M6.5 16H6a4 4 0 0 1 0-8h.5l1.573-3.146A1.545 1.545 0 0 1 11 5.545v12.91a1.545 1.545 0 0 1-2.927.69zM13 5a1 1 0 0 1 1-1 8 8 0 1 1 0 16 1 1 0 1 1 0-2 6 6 0 0 0 0-12 1 1 0 0 1-1-1M14 8a1 1 0 1 0 0 2 2 2 0 1 1 0 4 1 1 0 1 0 0 2 4 4 0 0 0 0-8"
+                    ></path>
+                </svg>
+            </div>
+            <div style="display: none;">{{Audio}}</div>
+        </div>
+
+        <!-- See Translation Button -->
+        <button onclick="toggleTranslation()" id="translation-button" class="translation-button">SEE TRANSLATION</button>
+
+        <!-- Translation Section -->
+        <div id="translation-section" style="display: none;">{{TranslatedSentence}}</div>
+
+        <!-- Media Section -->
+        <div class="media-section">
+            {{Image}}
+        </div>
+
+        <!-- Notes and Hanja Section -->
+        <div class="notes-section">
+            <div class="hanja-container">
+                <strong>HANJA</strong>
+                <p>{{Hanja}}</p>
+            </div>
+
+            <div class="notes-container">
+                <strong>NOTES</strong>
+                <p>{{UserNote}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function toggleTranslation() {
+    const translationSection = document.getElementById("translation-section");
+    const translationButton = document.getElementById("translation-button");
+    
+    if (translationSection.style.display === "none") {
+        translationSection.style.display = "block";
+        translationButton.textContent = "HIDE TRANSLATION";
+    } else {
+        translationSection.style.display = "none";
+        translationButton.textContent = "SEE TRANSLATION";
+    }
+}
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 't' || e.key === 'T') {
+        e.preventDefault();
+        toggleTranslation();
+    } else if (e.key === ' ') {
+        e.preventDefault();
+        pycmd('play:r:0');
+    }
+});
+</script>
